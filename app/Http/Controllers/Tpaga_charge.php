@@ -11,22 +11,12 @@ use Tpaga;
 class Tpaga_charge extends Controller
 {
 
-   /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view('Tpaga_charge.index');//
+        return view('Tpaga_charge.index');
 
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     public function charge(Request $request)
     {
@@ -45,16 +35,19 @@ class Tpaga_charge extends Controller
         $data['cardid'] = '';
         $data['chargeid'] = '';
         $data['error'] = '';
+
         // Authentication
         $config= new Tpaga\Configuration();
-        $config->setUsername('9jk59hpr858j34oibplotp839pdm7mau');
+        $config->setUsername('d13fr8n7vhvkuch3lq2ds5qhjnd2pdd2');
         $apiClient = new tpaga\ApiClient($config);
        
+        // Getting info from form
         $data['firstname'] = $request->input('firstname'); 
         $data['lastname'] = $request->input('lastname');
-        $data['cardnumber'] = $request->input('cardnumber');
-        $data['duemonth'] = $request->input('duemonth');
-        $data['dueyear'] = $request->input('dueyear');
+        $data['cardnumber'] =  str_replace(' ', '', $request->input('cardnumber'));
+        $duedate = $request->input('duedate');
+        $data['duemonth'] = substr($duedate, 0, 2);
+        $data['dueyear'] = substr($duedate,5);
         $data['securitycode'] = $request->input('securycode');
         $data['installments'] = $request->input('installments');
         $products = $request->input('products');
@@ -79,30 +72,32 @@ class Tpaga_charge extends Controller
         $data['amount'] = $amount;
         $data['taxamount'] = $amount*0.1;  
 
-
+        // Create a customer
         $customer = $this->createCustomer($apiClient,$data);
         if (is_object($customer)){
             $data['customerid'] = $customer->getId();
         }
         else
         {
-            $data['error'] = $customer;
+            echo $data['error'] = $customer;
         }
+        // Create a credit card for the customer
         $card = $this->createCreditCard($apiClient,$data);  
         if (is_object($card)){   
             $data['cardid'] = $card->getId();
         }
         else
         {
-            $data['error'] = $card;
+            echo $data['error'] = $card;
         }
+        // Charge customer's credit card 
         $charge = $this->chargeCreditCard($apiClient, $data);
         if (is_object($charge)){
             $data['chargeid'] = $charge->getId();
         }
         else
         {
-            $data['error'] = $charge;
+            echo $data['error'] = $charge;
         }
 
         return view('Tpaga_charge.confirm',$data);
@@ -178,11 +173,5 @@ class Tpaga_charge extends Controller
         }
 
       }
-
-
-
-
-
-
         
 }

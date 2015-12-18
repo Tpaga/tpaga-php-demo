@@ -1,5 +1,5 @@
 @extends('layouts.default')
-@section('content')
+@section('paymentcontent')
     
 
 
