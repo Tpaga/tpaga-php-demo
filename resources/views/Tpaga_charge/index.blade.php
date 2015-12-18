@@ -21,8 +21,10 @@
 
 
     .panel-default > .panel-heading-custom {
-        background: #3399FF; color: #fff; font-size: 25px;
-        height: 50px; text-align: center; 
+        background: #009999; color: #fff; 
+        height: 80px; text-align: center;
+        font-style: bold; 
+
     }
 
     .padding{
@@ -30,6 +32,11 @@
     }
     .center{
       text-align: center;
+    }
+
+    .form-text{
+      color: black !important;
+
     }
   </style>
 
@@ -92,7 +99,7 @@
       <div class="row">
         <div class="col-xs-4 ">
           <a href="#" class="thumbnail">
-            <img src="{{asset('assets/images/combo1.jpg')}}" alt="COMBO1" height="200" style="max-height:220px">
+            <img  class="img-rounded" src="{{asset('assets/images/combo1.jpg')}}" alt="COMBO1" height="200" style="max-height:220px">
           </a>
 
           {!! Form::checkbox('products[]', 'Combo 1', true) !!}
@@ -102,7 +109,7 @@
         </div>
         <div class="col-xs-4 ">
           <a href="#" class="thumbnail">
-            <img src="{{asset('assets/images/combo2.jpg')}}" alt="COMBO2" height="200" style="max-height:220px" >
+            <img class="img-rounded" src="{{asset('assets/images/combo2.jpg')}}" alt="COMBO2" height="200" style="max-height:220px" >
           </a>
 
           {!! Form::checkbox('products[]', 'Combo 2', false) !!}
@@ -112,7 +119,7 @@
         </div>
         <div class="col-xs-4  " >
           <a href="#" class="thumbnail">
-            <img src="{{asset('assets/images/combo3.jpg')}}" alt="COMBO3" height="200"  style="max-height:220px">
+            <img class="img-rounded" src="{{asset('assets/images/combo3.jpg')}}" alt="COMBO3" height="200"  style="max-height:220px">
           </a>
 
           {!! Form::checkbox('products[]', 'Combo 3', false) !!}
@@ -131,8 +138,8 @@
       
       
       <div class="panel panel-default">
-        <div class="panel-heading panel-heading-custom">CREDIT CARD DETAILS</label></div>
-        <div class="panel-body ">
+        <div class="panel-heading panel-heading-custom"><h3>CREDIT CARD DETAILS</h3></label></div>
+        <div class="panel-body form-text">
           
 
               <!-- Title form input -->

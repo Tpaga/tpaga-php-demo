@@ -10,39 +10,76 @@
   <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
  
   <script src="{{asset('assets/js/bootstrap.js')}}"></script>
-  <script type="text/javascript">
-    $('#tapagacarousel').carousel({
-        interval: 1200
-    });
-  </script>
   
+ 
     @section('header')
       
     @show
 
   <style type="text/css">
-     body { background: #D3D3D3 !important; } 
+    body { 
+      background: #330000 !important; 
+      color: #FF6633   !important;
+    } 
+
+    small{
+      color:#FFFFCC !important;
+      font-style: italic;
+    }
+
+
+    nav {
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+      background-color: #FFFFCC !important;
+        
+      .navbar-brand {
+        color: #bd1e23 !important;
+        font-weight: bold;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
   </style>
 
   </head>
   <body>
     <div class="container">
       <div class="page-header">
-        <div class="row">
-          <div class="col-xs-8">
             <h1>COMBOMARKET<small>Eat online!</small></h1>
-          </div>
-          <div class="col-xs-4">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
-              </span> 
-            </div>
-          </div>
-        </div>
       </div>
     </div>
+
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">WELCOME!</a>
+          </div>
+      
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="navbar-brand">MENU</li>
+                <li class="navbar-brand">SIGN UP</li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+      </nav>
+    </div>
+
+
+
+
+
+
 
 
 
@@ -51,6 +88,7 @@
         <ol class = "carousel-indicators">
             <li data-target = "#tpagacarousel" data-slide-to = "0" class="active"></li>
             <li data-target = "#tpagacarousel" data-slide-to = "1"></li>
+            <li data-target = "#tpagacarousel" data-slide-to = "2"></li>
         </ol>
 
         <div class ="carousel-inner">
@@ -59,7 +97,11 @@
           </div>
 
           <div class = "item">
-            <img src = "{{asset('assets/images/bannerimg7.jpg')}}" alt ="bimg1" class="img-responsive">
+            <img src = "{{asset('assets/images/bannerimg7.jpg')}}" alt ="bimg2" class="img-responsive">
+          </div>
+
+          <div class = "item">
+            <img src = "{{asset('assets/images/bannerimg8.jpg')}}" alt ="bimg3" class="img-responsive">
           </div>
         </div>
 
@@ -72,6 +114,7 @@
         </a>
 
       </div>
+
     </div>
 
 
@@ -90,6 +133,11 @@
       
     @show
 
+  <script type="text/javascript">
+    $('#tpagacarousel').carousel({
+      interval: 4000
+    });
+  </script>
     
  </body>
 
