@@ -1,8 +1,7 @@
 # tpaga-php-website-demo
 TPAGA PHP WEBSITE DEMO
 
-For testing purposes this demo uses the API key token d13fr8n7vhvkuch3lq2ds5qhjnd2pdd2 in the sandbox environment. You also can create a Tpaga account at https://sandbox.tpaga.co
-and change API credentials in the charge function at app/Http/Controllers/Tpaga_charge.php
+For testing purposes, this demo uses the API key token "d13fr8n7vhvkuch3lq2ds5qhjnd2pdd2" in the Tpaga sandbox environment. You also can create a Tpaga account at https://sandbox.tpaga.co and change API credentials in the charge function at app/Http/Controllers/Tpaga_charge.php
 
 ```php
 public function charge(Request $request)
@@ -18,7 +17,7 @@ public function charge(Request $request)
 ```
 ## Requirements
 
-Composer.
+Composer (You can get it at http://getcomposer.org/).
 
 Laravel requirements: 
 
@@ -33,20 +32,20 @@ Laravel requirements:
 Download the package and install all its dependencies by typing this line in the project path:
 
 ```bash
-composer install
+$ composer install
 ```
-Make sure you have the directories permissions required by [laravel](http://laravel.com/docs/5.1#basic-configuration) specially in storage and public folders. Try this:
+Make sure you have the directories permissions required by [laravel](http://laravel.com/docs/5.1#basic-configuration), specially in storage and public folders. Try this:
 
 ```bash
-sudo chown -R www-data:www-data tpapa-php-demo 
+$ sudo chown -R www-data:www-data tpapa-php-demo 
 
-sudo find tpapa-php-demo -type d -exec chmod 0755 {} \;
+$ sudo find tpapa-php-demo -type d -exec chmod 0755 {} \;
 
-sudo find tpapa-php-demo -type f -exec chmod 0644 {} \;
+$ sudo find tpapa-php-demo -type f -exec chmod 0644 {} \;
 
-sudo chmod 0777 -R tpapa-php-demo/storage
+$ sudo chmod 0777 -R tpapa-php-demo/storage
 
-sudo chmod 0777 -R tpapa-php-demo/public
+$ sudo chmod 0777 -R tpapa-php-demo/public
 
 ```
 ## Apache
@@ -79,9 +78,9 @@ Update your host address by adding this line to the file "hosts" in the "/etc" f
 Finally, restart apache service and enable the site.
 
 ```bash
-sudo service apache2 restart
+$ sudo service apache2 restart
 
-sudo a2ensite tpaga-php-demo.com
+$ sudo a2ensite tpaga-php-demo.com
 ```
 Now you can go to your browser and type tpaga-php-demo.com
 
