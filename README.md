@@ -88,6 +88,8 @@ Now you can go to your browser and type tpaga-php-demo.com
 
 You will see a website from a rapid food place where you can chose among three combo options. After that, you can insert your credit card information and pay for your selection.
 
+![phpweb](/phpweb.png)
+
 ## What does the application do?
 
 This demo takes your credit card information and creates a customer, assigns a credit card to that customer and performs a charge to that card in the Tpaga sandbox environment. If you get a successfull transaction you will see the description of your purchase and the transaction id.
