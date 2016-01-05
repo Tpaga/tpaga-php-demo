@@ -10,11 +10,17 @@ public function charge(Request $request)
 	...
 
 	$config= new Tpaga\Configuration();
-	$config->setUsername('d13fr8n7vhvkuch3lq2ds5qhjnd2pdd2');
+  $config->setUsername(env('TPAGA_API_KEY','d13fr8n7vhvkuch3lq2ds5qhjnd2pdd2'));
 	$apiClient = new tpaga\ApiClient($config);
 
 }
 ```
+You can also use an environment variable called 'TPAGA_API_KEY' by creating an .env file to define it in the root of the project:
+
+```
+TPAGA_API_KEY='d13fr8n7vhvkuch3lq2ds5qhjnd2pdd2'
+```
+
 ## Requirements
 
 Composer (You can get it at http://getcomposer.org/).
@@ -37,15 +43,15 @@ $ composer install
 Make sure you have the directories permissions required by [laravel](http://laravel.com/docs/5.1#basic-configuration), specially in storage and public folders. Try this:
 
 ```bash
-$ sudo chown -R www-data:www-data tpapa-php-demo 
+$ sudo chown -R www-data:www-data tpaga-php-demo 
 
-$ sudo find tpapa-php-demo -type d -exec chmod 0755 {} \;
+$ sudo find tpaga-php-demo -type d -exec chmod 0755 {} \;
 
-$ sudo find tpapa-php-demo -type f -exec chmod 0644 {} \;
+$ sudo find tpaga-php-demo -type f -exec chmod 0644 {} \;
 
-$ sudo chmod 0777 -R tpapa-php-demo/storage
+$ sudo chmod 0777 -R tpaga-php-demo/storage
 
-$ sudo chmod 0777 -R tpapa-php-demo/public
+$ sudo chmod 0777 -R tpaga-php-demo/public
 
 ```
 ## Apache

@@ -38,7 +38,7 @@ class Tpaga_charge extends Controller
 
         // Authentication
         $config= new Tpaga\Configuration();
-        $config->setUsername('d13fr8n7vhvkuch3lq2ds5qhjnd2pdd2');
+        $config->setUsername(env('TPAGA_API_KEY','d13fr8n7vhvkuch3lq2ds5qhjnd2pdd2'));
         $apiClient = new tpaga\ApiClient($config);
        
         // Getting info from form
