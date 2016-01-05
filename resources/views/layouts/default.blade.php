@@ -124,7 +124,7 @@
     @show
     <div class="container">
       <div class="row">
-        <h1> <img src="{{asset('assets/images/logo.png')}}" alt="TPAGA" height="90" width="250"> </h1>
+        <h1> <img src="{{asset('assets/images/logo.png')}}" alt="TPAGA" height="50" width="220"> </h1>
       </div>
     </div>
 
