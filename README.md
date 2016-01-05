@@ -15,7 +15,7 @@ public function charge(Request $request)
 
 }
 ```
-You can also use an environment variable called 'TPAGA_API_KEY' by creating an .env file to define it in the root of the project:
+You can also use an environment variable called *TPAGA_API_KEY* by creating an .env file to define it in the root of the project:
 
 ```
 TPAGA_API_KEY='d13fr8n7vhvkuch3lq2ds5qhjnd2pdd2'
