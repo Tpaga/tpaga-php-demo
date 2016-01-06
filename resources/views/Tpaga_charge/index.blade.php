@@ -3,7 +3,7 @@
 @section('header')
 
   <script src="{{asset('assets/js/jquery.payment.js')}}"></script>
- 
+  <script src="{{asset('assets/js/tpaga.payment.js')}}"></script>
 
   <style type="text/css" media="screen">
     .has-error input {
@@ -40,8 +40,15 @@
     }
   </style>
 
+  <script type="text/javascript">
+    Payments.setPublicKey("pk_test_psnkgsmzh8g82rg6rififw6g");
+    
+  </script>
+
   <script>
-    jQuery(function($) {
+
+    $(function() {
+      
       $('.cardnumber').payment('formatCardNumber');
       $('.securitycode').payment('formatCardCVC');
       $('.duedate').payment('formatCardExpiry');
@@ -54,8 +61,16 @@
 
       e.preventDefault();
 
+      var responseHandler = function(err, data) {
+        if (err) alert(err.code + " - " + err.message);
+        else {
+          $('form').append($('<input type="hidden" name="tokenid">').val(data.token));
+          $('form').get(0).submit();
+        }
+      };
+
       var cardType = $.payment.cardType($('.cardnumber').val());
-      //$('.validation').html(date);
+
       $('.cardnumber').toggleInputError(!$.payment.validateCardNumber($('.cardnumber').val()));
       $('.securitycode').toggleInputError(!$.payment.validateCardCVC($('.securitycode').val(), cardType));
       $('.duedate').toggleInputError(!$.payment.validateCardExpiry($('.duedate').payment('cardExpiryVal')));
@@ -64,14 +79,26 @@
       $('.validation').removeClass('text-danger text-success');
       $('.validation').addClass($('.has-error').length ? 'text-danger' : 'text-success');
       
+
+
       var errors = $('.has-error');
 
       if (!errors.length)
       {
 
-        $(this).unbind('submit').submit();
         $('.alert').removeClass('alert-danger');
         $('.alert').addClass('alert-success');
+
+        Payments.createToken({
+        primaryAccountNumber: $('.cardnumber').val().replace(/\s/g, ""),
+        expirationMonth: $('.duedate').payment('cardExpiryVal').month,
+        expirationYear: $('.duedate').payment('cardExpiryVal').year,
+        cvc: $('.securitycode').val(),
+        cardHolderName: $('.firstname').val() + " " + $('.lastname').val()
+      }, responseHandler);
+
+        
+        
       }
       else
       {
@@ -133,7 +160,7 @@
 
 @stop
 @section('paymentcontent')    
-
+    <span class="publickey"></span>
     <div class="container">
       
       
@@ -172,7 +199,7 @@
                 <div class='form-field'> 
                   <div class="form-group">
                     {!! Form::label('firstname', 'First name:') !!}
-                    {!! Form::text('firstname', null, ['class' => 'form-control', 'required' => 'required', 'autocomplete' => 'firstname']) !!}
+                    {!! Form::text('firstname', null, ['class' => 'form-control firstname', 'required' => 'required', 'autocomplete' => 'firstname']) !!}
                   </div>
                 </div>
               </div>
@@ -180,7 +207,7 @@
                 <div class='form-field'> 
                   <div class="form-group">
                     {!! Form::label('lastname', 'Last name:') !!}
-                    {!! Form::text('lastname', null, ['class' => 'form-control', 'required' => 'required', 'autocomplete' => 'lastname']) !!} 
+                    {!! Form::text('lastname', null, ['class' => 'form-control lastname', 'required' => 'required', 'autocomplete' => 'lastname']) !!} 
                   </div>
                 </div>
               </div>  
