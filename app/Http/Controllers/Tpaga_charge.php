@@ -23,7 +23,10 @@ class Tpaga_charge extends Controller
 
         $data['firstname'] = ''; 
         $data['lastname'] = '';
-        $data['tokenid'] = 0;
+        $data['cardnumber'] = 0;
+        $data['duemonth'] = '';
+        $data['dueyear'] = '';
+        $data['securitycode'] = '';
         $data['installments'] = '';
         $data['description'] = '';
         $data['amount'] = 0;
@@ -35,13 +38,17 @@ class Tpaga_charge extends Controller
 
         // Authentication
         $config= new Tpaga\Configuration();
-        $config->setUsername(env('TPAGA_API_KEY','9jk59hpr858j34oibplotp839pdm7mau'));
+        $config->setUsername(env('TPAGA_API_KEY','d13fr8n7vhvkuch3lq2ds5qhjnd2pdd2'));
         $apiClient = new tpaga\ApiClient($config);
        
         // Getting info from form
         $data['firstname'] = $request->input('firstname'); 
         $data['lastname'] = $request->input('lastname');
-        $data['tokenid'] =  $request->input('tokenid');
+        $data['cardnumber'] =  str_replace(' ', '', $request->input('cardnumber'));
+        $duedate = $request->input('duedate');
+        $data['duemonth'] = substr($duedate, 0, 2);
+        $data['dueyear'] = substr($duedate,5);
+        $data['securitycode'] = $request->input('securycode');
         $data['installments'] = $request->input('installments');
         $products = $request->input('products');
         $description ='';
@@ -72,7 +79,7 @@ class Tpaga_charge extends Controller
         }
         else
         {
-            $data['error'] = $customer;
+            echo $data['error'] = $customer;
         }
         // Create a credit card for the customer
         $card = $this->createCreditCard($apiClient,$data);  
@@ -81,7 +88,7 @@ class Tpaga_charge extends Controller
         }
         else
         {
-            $data['error'] = $card;
+            echo $data['error'] = $card;
         }
         // Charge customer's credit card 
         $charge = $this->chargeCreditCard($apiClient, $data);
@@ -90,7 +97,7 @@ class Tpaga_charge extends Controller
         }
         else
         {
-            $data['error'] = $charge;
+            echo $data['error'] = $charge;
         }
 
         return view('Tpaga_charge.confirm',$data);
@@ -123,13 +130,21 @@ class Tpaga_charge extends Controller
 
     public function createCreditCard($apiClient, $data){
 
-        $token = new Tpaga\Model\Token();
-        $token->setToken($data['tokenid']);
+        $creditCard = new Tpaga\Model\CreditCardCreate();
+        $billingAddress = new Tpaga\Model\BillingAddress();
+
+        $creditCard->setPrimaryAccountNumber($data['cardnumber']);
+        $creditCard->setExpirationMonth($data['duemonth']);
+        $creditCard->setExpirationYear($data['dueyear']);
+        $creditCard->setCardVerificationCode($data['securitycode']);
+        $creditCard->setCardHolderName($data['firstname']." ".$data['lastname']);
+        $creditCard->setBillingAddress($billingAddress);
+
         $creditCardCustomer = $data['customerid'];
-        $creditCardWithTokenAPI = new Tpaga\Api\TokenApi($apiClient);
+        $creditCardAPI = new Tpaga\Api\CreditCardApi($apiClient);
 
         try {
-            $response = $creditCardWithTokenAPI->addCreditCardToken($creditCardCustomer, $token);
+            $response = $creditCardAPI->addCreditCard($creditCardCustomer, $creditCard);
             return $response;
         } catch (Tpaga\ApiException $e) {
             return ('Caught exception: ' . $e->getMessage() . "\n");
