@@ -15,7 +15,7 @@ public function charge(Request $request)
 
 }
 ```
-You can also use an environment variable called 'TPAGA_API_KEY' by creating an .env file to define it in the root of the project:
+You can also use an environment variable called *TPAGA_API_KEY* by creating an .env file to define it in the root of the project:
 
 ```
 TPAGA_API_KEY='d13fr8n7vhvkuch3lq2ds5qhjnd2pdd2'
@@ -103,3 +103,7 @@ This demo takes your credit card information and creates a customer, assigns a c
 ## Documentation
 
 Please see https://tpaga.com/docs for extra documentation.
+
+## License
+
+This is an open-sourced software licensed under the [Apache license, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
