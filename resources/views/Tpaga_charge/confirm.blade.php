@@ -8,7 +8,7 @@
 	@if ($error)
 	<div class="alert alert-danger" role="alert">Failed transaction!!</div>    
 	@else
-	<div class="alert alert-success" role="alert">Well done! You get: {{$description}} for {{$amount}}, Charge id: . {{$chargeid}}</div>
+	<div class="alert alert-success" role="alert">Well done! You get: {{$description}} for {{$amount}}, Charge id:  {{$chargeid}}</div>
 	@endif
 
 

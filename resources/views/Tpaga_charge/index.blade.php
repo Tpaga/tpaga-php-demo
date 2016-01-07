@@ -41,7 +41,9 @@
   </style>
 
   <script type="text/javascript">
-    Payments.setPublicKey("pk_test_qvbvuthlvqpijnr0elmtg5jh");
+
+
+    Payments.setPublicKey("{{ env('TPAGA_PUB_KEY','pk_test_qvbvuthlvqpijnr0elmtg5jh') }}");
     
   </script>
 
