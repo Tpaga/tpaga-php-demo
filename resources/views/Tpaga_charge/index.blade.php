@@ -41,7 +41,7 @@
   </style>
 
   <script type="text/javascript">
-    Payments.setPublicKey("pk_test_psnkgsmzh8g82rg6rififw6g");
+    Payments.setPublicKey("pk_test_qvbvuthlvqpijnr0elmtg5jh");
     
   </script>
 
