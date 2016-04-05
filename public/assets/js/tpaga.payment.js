@@ -24,7 +24,7 @@ var Payments = function() {
         if (xmlHttp.status >= 200 && xmlHttp.status < 300) {
           handler(null, JSON.parse(xmlHttp.responseText));
         } else {
-          var err = JSON.parse(xmlHttp.responseText)['error'];
+          var err = JSON.parse(xmlHttp.responseText)['errors'];
           err.status = xmlHttp.status;
           handler(err)
         }
